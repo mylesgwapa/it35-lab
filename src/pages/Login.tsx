@@ -59,7 +59,7 @@ const Login: React.FC = () => {
             >
               <img
                 alt="User Avatar"
-                src="https://scontent.fmnl4-7.fna.fbcdn.net/v/t39.30808-6/475234841_614656854583956_3344141762035701787_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=AdXPrO5ECEIQ7kNvgF5wEyI&_nc_oc=Adh1koyAx8PkuK_ydP1waTHph3oUZmSVfdzraCBn1QRZXiHvrOPEnSvUc6BYTeLHnNU&_nc_zt=23&_nc_ht=scontent.fmnl4-7.fna&_nc_gid=AlHd5s2KYYvfX35Zn9DqA3F&oh=00_AYAu8vREYBDTQWIzecqMSjtfUZACkf04v0ttOZM17pLzRQ&oe=67C5BA19"
+                src="https://scontent.fmnl25-5.fna.fbcdn.net/v/t39.30808-6/475234841_614656854583956_3344141762035701787_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=PwM1jRXwDQwQ7kNvgE_PjJi&_nc_oc=AdjM4DkhER_G4sJySu1BnAzfdZ28klTrw2YnCUgHr8lGSQSmWA4F4H5XaVUNJGH19hY&_nc_zt=23&_nc_ht=scontent.fmnl25-5.fna&_nc_gid=AVH0z9yEX1asga0U1o0Sh0q&oh=00_AYEQY0KFaQYl3frCMrBjalBIHgOYJk8_KcFoxhdxEP9C6w&oe=67D07E59"
                 style={{ width: '100%', height: '100%' }} 
               />
             </IonAvatar>

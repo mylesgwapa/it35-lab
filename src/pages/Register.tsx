@@ -1,31 +1,37 @@
 import { IonAvatar, IonButton, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar, IonAlert, useIonRouter } from '@ionic/react';
 import { useState } from 'react';
-import { eyeOff, eye, person, lockClosed } from 'ionicons/icons';
+import { eyeOff, eye, person, mail, lockClosed } from 'ionicons/icons';
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showAlert, setShowAlert] = useState({ show: false, message: '' });
   const navigation = useIonRouter();
 
-  const handleLogin = () => {
-    const storedUser = localStorage.getItem(username);
-    if (storedUser && JSON.parse(storedUser).password === password) {
-      setShowAlert({ show: true, message: 'Login Successful!' });
-      setTimeout(() => {
-        navigation.push('/it35-lab/app', 'forward', 'replace');
-      }, 1000);
-    } else {
-      setShowAlert({ show: true, message: 'Invalid credentials!' });
+  const handleRegister = () => {
+    if (!username || !email || !password || !confirmPassword) {
+      setShowAlert({ show: true, message: 'Please fill in all fields!' });
+      return;
     }
+    if (password !== confirmPassword) {
+      setShowAlert({ show: true, message: 'Passwords do not match!' });
+      return;
+    }
+    localStorage.setItem(username, JSON.stringify({ username, email, password }));
+    setShowAlert({ show: true, message: 'Registration Successful!' });
+    setTimeout(() => {
+      navigation.push('/login', 'forward', 'replace');  // Redirect to login after registration
+    }, 1000);
   };
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Login</IonTitle>
+          <IonTitle>Register</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -35,12 +41,18 @@ const Login: React.FC = () => {
               <img alt="User Avatar" src="https://tse2.mm.bing.net/th?id=OIP.VQ-jXFhDVUT3LNGGqh5qgwHaHa&pid=Api&P=0&h=220" style={{ width: '120px', height: '60px', borderRadius: '60%' }} />
             </IonAvatar>
             <h1 style={{ marginBottom: '20px', color: '#ff6219' }}>StoreSync</h1>
-            <h5 style={{ marginBottom: '20px', color: '#393f81' }}>Sign into your account</h5>
+            <h5 style={{ marginBottom: '20px', color: '#393f81' }}>Create your account</h5>
 
             <IonItem style={{ width: '100%', marginBottom: '20px' }}>
               <IonIcon icon={person} slot="start" />
               <IonLabel position="stacked">Username</IonLabel>
               <IonInput value={username} onIonChange={e => setUsername(e.detail.value!)} placeholder="Enter your username" />
+            </IonItem>
+
+            <IonItem style={{ width: '100%', marginBottom: '20px' }}>
+              <IonIcon icon={mail} slot="start" />
+              <IonLabel position="stacked">Email</IonLabel>
+              <IonInput value={email} onIonChange={e => setEmail(e.detail.value!)} placeholder="Enter your email" />
             </IonItem>
 
             <IonItem style={{ width: '100%', marginBottom: '20px' }}>
@@ -50,18 +62,25 @@ const Login: React.FC = () => {
               <IonIcon icon={showPassword ? eyeOff : eye} slot="end" onClick={() => setShowPassword(!showPassword)} />
             </IonItem>
 
-            <IonButton onClick={handleLogin} expand="full" style={{ marginBottom: '10px' }}>
-              Login
+            <IonItem style={{ width: '100%', marginBottom: '20px' }}>
+              <IonIcon icon={lockClosed} slot="start" />
+              <IonLabel position="stacked">Confirm Password</IonLabel>
+              <IonInput type={showPassword ? 'text' : 'password'} value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)} placeholder="Confirm your password" />
+              <IonIcon icon={showPassword ? eyeOff : eye} slot="end" onClick={() => setShowPassword(!showPassword)} />
+            </IonItem>
+
+            <IonButton onClick={handleRegister} expand="full" style={{ marginBottom: '10px' }}>
+              Register
             </IonButton>
 
             <p style={{ marginTop: '20px', color: '#393f81' }}>
-              Don't have an account? <a href="/register" style={{ color: '#393f81' }}>Register here</a>
+              Already have an account? <a href="/login" style={{ color: '#393f81' }}>Login here</a>
             </p>
 
             <IonAlert
               isOpen={showAlert.show}
               onDidDismiss={() => setShowAlert({ show: false, message: '' })}
-              header="Login Status"
+              header="Registration Status"
               message={showAlert.message}
               buttons={['OK']}
             />
@@ -72,4 +91,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Register;

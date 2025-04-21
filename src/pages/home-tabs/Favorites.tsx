@@ -7,7 +7,6 @@ import {
       IonTitle, 
       IonToolbar 
   } from '@ionic/react';
-  
   const Favorites: React.FC = () => {
     return (
       <IonPage>
@@ -20,6 +19,7 @@ import {
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
+
         <div
           style={{
             display: 'flex',
@@ -30,9 +30,9 @@ import {
         >
           Favorites
         </div>
+        
         </IonContent>
       </IonPage>
     );
   };
-  
-  export default Favorites; 
+  export default Favorites;

@@ -3,14 +3,12 @@ import {
   IonAvatar,
   IonButton,
   IonContent, 
-  IonIcon, 
   IonInput, 
   IonInputPasswordToggle,  
   IonPage,  
   IonToast,  
   useIonRouter
 } from '@ionic/react';
-import { logoIonic } from 'ionicons/icons';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
 
@@ -51,7 +49,25 @@ const Login: React.FC = () => {
   
   return (
     <IonPage>
-      <IonContent className='ion-padding'>
+      <IonContent className="ion-padding" style={{ backgroundColor: 'lightblue' }}>
+        
+        {/* Keyframe for glowing animation */}
+        <style>
+          {`
+            @keyframes glow {
+              0% {
+                box-shadow: 0 0 5px #00bcd4, 0 0 10px #00bcd4;
+              }
+              50% {
+                box-shadow: 0 0 20px #00bcd4, 0 0 30px #00bcd4;
+              }
+              100% {
+                box-shadow: 0 0 5px #00bcd4, 0 0 10px #00bcd4;
+              }
+            }
+          `}
+        </style>
+
         <div style={{
           display: 'flex',
           flexDirection:'column',
@@ -59,6 +75,7 @@ const Login: React.FC = () => {
           justifyContent: 'center',
           marginTop:'25%'
         }}>
+          {/* Avatar with glowing animation */}
           <IonAvatar
             style={{
               display: 'flex',
@@ -67,13 +84,16 @@ const Login: React.FC = () => {
               width: '150px',
               height: '150px',
               borderRadius: '50%', 
-              overflow: 'hidden' 
+              overflow: 'hidden',
+              backgroundColor: '#fff',
+              animation: 'glow 2s ease-in-out infinite',
+              border: '4px solid #00bcd4'
             }}
           >
-            <IonIcon 
-              icon={logoIonic}
-              color='primary'
-              style={{ fontSize: '120px', color: '#6c757d' }} 
+            <img
+              src="https://gifss.com/robot/images/robot-33.gif"
+              alt="Robot Logo"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </IonAvatar>
           <h1 style={{
@@ -81,6 +101,7 @@ const Login: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>USER LOGIN</h1>
+          
           <IonInput
             label="Email" 
             labelPlacement="floating" 
@@ -100,6 +121,7 @@ const Login: React.FC = () => {
             <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
           </IonInput>
         </div>
+        
         <IonButton onClick={doLogin} expand="full" shape='round'>
           Login
         </IonButton>

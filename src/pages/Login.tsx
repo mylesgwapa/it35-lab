@@ -11,7 +11,7 @@ import {
 } from '@ionic/react';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
-import logsGif from './images/logs.gif'; // Avatar gif
+import logsGif from './images/logs.gif'; // ✅ Importing the avatar gif image
 
 const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
   return (
@@ -45,102 +45,86 @@ const Login: React.FC = () => {
     setShowToast(true);
     setTimeout(() => {
       navigation.push('/it35-lab/app', 'forward', 'replace');
-    }, 300);
+    }, 1000);
   };
 
   return (
     <IonPage>
-      <IonContent
-        className="ion-padding"
-        style={{
-          backgroundImage: `url("https://pa1.narvii.com/6808/6f5fedd7dffaed239b1262b33b576c8af764d409_hq.gif")`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-          minHeight: '100vh'
-        }}
-      >
-        <style>
-          {`
-            @keyframes glow {
-              0% {
-                box-shadow: 0 0 5px #00bcd4, 0 0 10px #00bcd4;
-              }
-              50% {
-                box-shadow: 0 0 20px #00bcd4, 0 0 30px #00bcd4;
-              }
-              100% {
-                box-shadow: 0 0 5px #00bcd4, 0 0 10px #00bcd4;
-              }
-            }
-          `}
-        </style>
-
+      <IonContent fullscreen>
         <div
           style={{
-            maxWidth: '400px',
-            margin: '10% auto',
-            backgroundColor: 'rgba(255, 255, 255, 0.9)',
-            padding: '20px',
-            borderRadius: '15px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-            textAlign: 'center'
+            backgroundImage: 'url("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWNudmw4dWhrYmxzbTF5MHYyOHd0YWhoZnJibmdqcTF3NDVld294NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fwo7bzEVxbYS4eSNVd/giphy.gif")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <IonAvatar
-            style={{
-              margin: '0 auto',
-              width: '150px',
-              height: '150px',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              backgroundColor: '#fff',
-              animation: 'glow 2s ease-in-out infinite',
-              border: '4px solid #00bcd4'
-            }}
-          >
-            <img
-              src={logsGif}
-              alt="Robot Logo"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          <div style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.85)',
+            padding: '20px',
+            margin: '20px',
+            borderRadius: '15px',
+            width: '90%',
+            maxWidth: '400px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+            <IonAvatar
+              style={{
+                width: '150px',
+                height: '150px',
+                marginBottom: '20px',
+                boxShadow: '0 4px 15px rgba(44, 146, 187, 0.96)',
+                borderRadius: '50%', 
+                overflow: 'hidden'   
+              }}
+            >
+              <img
+                src={logsGif}
+                alt="User Avatar"
+                style={{ width: '100%', height: '100%' }}
+              />
+            </IonAvatar>
+
+            <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>USER LOGIN</h1>
+
+            <IonInput
+              label="Email"
+              labelPlacement="floating"
+              fill="outline"
+              type="email"
+              placeholder="Enter Email"
+              value={email}
+              onIonChange={e => setEmail(e.detail.value!)}
+              style={{ width: '100%' }}
             />
-          </IonAvatar>
 
-          <h1 style={{ marginTop: '15px', color: '#333' }}>USER LOGIN</h1>
+            <IonInput
+              style={{ marginTop: '10px', width: '100%' }}
+              fill="outline"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onIonChange={e => setPassword(e.detail.value!)}
+            >
+              <IonInputPasswordToggle slot="end" />
+            </IonInput>
 
-          <IonInput
-            label="Email"
-            labelPlacement="floating"
-            fill="outline"
-            type="email"
-            placeholder="Enter Email"
-            value={email}
-            onIonChange={e => setEmail(e.detail.value!)}
-          />
-          <IonInput
-            style={{ marginTop: '10px' }}
-            fill="outline"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onIonChange={e => setPassword(e.detail.value!)}
-          >
-            <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-          </IonInput>
+            <IonButton onClick={doLogin} expand="block" shape="round" style={{ marginTop: '20px' }}>
+              Login
+            </IonButton>
 
-          <IonButton onClick={doLogin} expand="block" shape="round" style={{ marginTop: '20px' }}>
-            Login
-          </IonButton>
-
-          <IonButton
-            routerLink="/it35-lab/register"
-            expand="block"
-            fill="clear"
-            shape="round"
-            style={{ marginTop: '10px' }}
-          >
-            Don't have an account? Register here
-          </IonButton>
+            <IonButton routerLink="/it35-lab/register" expand="block" fill="clear" shape="round">
+              Don't have an account? Register here
+            </IonButton>
+          </div>
         </div>
 
         <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
